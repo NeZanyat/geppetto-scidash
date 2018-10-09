@@ -130,12 +130,11 @@ body {
 .scidash-tilted-titles-table {
     color: @secondary_color;
     .scidash-tilted-titles-table-heading-cell{
-        vertical-align:top;
-        text-align: left;
-        height: 150px;
-        max-width: 90px;
-        word-wrap: break-word;
-        transform: translate(60px,35px) rotate(315deg);
+         	height:30px;
+         	max-height: 30px;
+         	max-width: 50px;
+         	vertical-align: bottom;
+         	white-space: nowrap;   
 	}
     .filter-label {
         padding: 0px 10px;
@@ -149,11 +148,36 @@ body {
     th{
         vertical-align:top;
     }
+    
     .griddle-cell {
         border-top:1px solid #aaa;
     }
 }
-    
+
+.scidash-tilted-titles-table-heading-cell-div{
+    vertical-align: top;
+    text-align: left;
+    max-width: 220px;
+    height: 200px;
+    max-height: 150px;
+    width: 225px;
+    transform: translate(35px, 35px) rotate(315deg);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hideAll-column {
+    /* Adjustments to column with hide all buttons*/
+    th:last-child{
+    	padding-left : 20px;
+    }
+}
+
+.modelName-row-heading{
+	padding: 0px 20px 5px 0;
+}
+
 .scidash-materialui-field {
     float:right;
     div{
@@ -219,7 +243,12 @@ div[role=menu]{
 
 .suites-table{
     width: 90%;
-    margin:0 auto;
+    margin:10px auto;
+}
+
+.modal-table{
+    width: auto;
+    margin:55px auto;
 }
 
 .centered-modal {
@@ -235,11 +264,6 @@ div[role=menu]{
     height: 64px;
     text-align: center;
     overflow: visible;
-}
-
-.avg-score-heading {
-    word-wrap: break-word;
-    max-width: 150px;
 }
 
 .build-info-cell {

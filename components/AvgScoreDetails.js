@@ -64,25 +64,30 @@ export default class AvgScoreDetails extends React.Component {
 
                 <a onClick={() => this.toggleScoreDetails(item)} style={{
                     cursor: "pointer",
+                    padding: "8px",
+                    margin: "0px",
                     color: "white"
                 }}>{item.get("sort_key").toFixed(2)}</a>
 
             </td>;
         });
         const headings = this.state.scoreList.map((item, index) => {
-            return <th className="avg-score-heading scidash-tilted-titles-table-heading-cell" key={"heading-" + item.get("id")} style={{
-                fontStyle: this.state.selectedScore == item.get("id") ? "italic" : "normal",
-                textDecoration: this.state.selectedScore == item.get("id") ? "underline" : "none"
-            }}>{item.get("test_instance").get("test_class").get("class_name")}</th>;
+            return <th className="scidash-tilted-titles-table-heading-cell" key={"heading-" + item.get("id")}
+                    style={{fontStyle: this.state.selectedScore == item.get("id") ? "italic" : "normal",	
+                    textDecoration: this.state.selectedScore == item.get("id") ? "underline" : "none"}}>
+                      <div className="scidash-tilted-titles-table-heading-cell-div">
+                          {item.get("test_instance").get("test_class").get("class_name")}
+                      </div>
+                   </th>;
         });
 
         return (
             <div>
                 <Card>
-                    <CardText style={{
+                	<CardText style={{
                         overflowX: "scroll"
                     }}>
-                        <table className="table scidash-tilted-titles-table">
+                        <table className="modal-table scidash-tilted-titles-table">
                             <thead>
                                 <tr>
                                     <td></td>
@@ -91,7 +96,7 @@ export default class AvgScoreDetails extends React.Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{modelName}</td>
+                                    <td className="modelName-row-heading">{modelName}</td>
                                     {columns}
                                 </tr>
                             </tbody>

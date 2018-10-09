@@ -32,7 +32,7 @@ export default class ScoreMatrix extends React.Component {
 
         this.styleConfig = {
             classNames: {
-                Table: "table scidash-tilted-titles-table suites-table",
+                Table: "modal-table scidash-tilted-titles-table hideAll-column",
                 TableHeadingCell: "scidash-tilted-titles-table-heading-cell",
             }
         }
@@ -65,7 +65,7 @@ export default class ScoreMatrix extends React.Component {
         this.setState({
             colorBlind: this.props.colorBlind
         })
-        this.load(this.props.suite.get("hash"))
+        this.load(this.props.suite.get("hash"));
     }
 
     load(hash = false){
@@ -146,7 +146,6 @@ export default class ScoreMatrix extends React.Component {
             id: "hideButtons"
         })
 
-
         return scoreMatrix;
     }
 
@@ -178,6 +177,7 @@ export default class ScoreMatrix extends React.Component {
     }
 
     render(){
+    	var self = this;
         if (this.state.scoreMatrix.headings.length > 0){
             const pageProperties = {
                 currentPage: 1,
@@ -188,19 +188,22 @@ export default class ScoreMatrix extends React.Component {
                 background: this.helper.getBackground(value.get("sort_key"), this.state.colorBlind),
                 color: "white",
                 padding: "8px",
-                margin : 0
+                margin : 0,
+                width: "auto"
             }}>{value.get("sort_key").toFixed(2)}</div>
 
 
+            const TitleHeader = ({title}) => <div className="scidash-tilted-titles-table-heading-cell-div">{title}</div>;
+            
             const HideRowCell = ({value}) => <i onClick={() => this.hideRow(value)} className="fa fa-eye-slash eye-icon" title="Hide row"></i>
                 const ShowAllHeading = ({value}) => <RaisedButton style={ !this.hiddenModels.length ? {
                 display: "none"
-            } : {}} onClick={this.showAll} icon={<FontIcon className="fa fa-eye show-all-icon" style={{ padding: 5 }}/>} title="Show all"/>
+            } : {maxWidth: '60px',minWidth: '60px'}} onClick={this.showAll} icon={<FontIcon className="fa fa-eye show-all-icon" style={{ padding: 5}}/>} title="Show all"/>
 
             const griddleComponents = {
                 Filter: () => null,
                 PageDropdown: () => null,
-                NoResults: () => <table className="table scidash-table suites-table no-results-table"><thead><tr><th><ShowAllHeading /></th></tr></thead></table>,
+                NoResults: () => <table className="modal-table scidash-tilted-titles-table"><thead><tr><th><ShowAllHeading /></th></tr></thead></table>,
                 SettingsToggle: () => null,
                 NextButton: (props) => {
                     if (props.hasNext)
@@ -231,11 +234,12 @@ export default class ScoreMatrix extends React.Component {
                             pageProperties={pageProperties} >
                             <RowDefinition>
                                 {this.state.scoreMatrix.headings.map((heading, index) => {
-                                    if (heading.title == "model_name"){
+                                	if (heading.title == "model_name"){
                                         return (<ColumnDefinition
                                                     id={heading.id}
                                                     key={index}
                                                     title=" "
+                                                    cssClassName="modelName-row-heading"
                                                     order={index + 1} />);
                                     } else if (heading.title == "hide_all") {
                                         return (<ColumnDefinition
@@ -248,11 +252,12 @@ export default class ScoreMatrix extends React.Component {
                                                     cssClassName="griddle-cell score-matrix-cell"
                                                     order={index + 1} />);
                                     } else {
-                                        return (<ColumnDefinition
+                                    	return (<ColumnDefinition
                                                     id={heading.id}
                                                     key={index}
                                                     title={heading.title}
                                                     customComponent={ScoreCell}
+                                    	            customHeadingComponent={TitleHeader}
                                                     cssClassName="griddle-cell score-matrix-cell"
                                                     order={index + 1} />);
                                     }
