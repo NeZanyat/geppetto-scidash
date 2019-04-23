@@ -1,6 +1,8 @@
 import BaseAdapter from "./BaseAdapter";
 import InitialStateService from "../../services/InitialStateService.js";
 
+const LOCKED = "l";
+
 export default class ModelsGriddleAdapter extends BaseAdapter {
 
   getGriddleData (){
@@ -32,7 +34,7 @@ export default class ModelsGriddleAdapter extends BaseAdapter {
         owner: model.owner.username,
         timestamp: fullDate,
         block: {
-          isBlocked: false,
+          isBlocked: model.status == LOCKED,
           modelId: model.id
         }
       });

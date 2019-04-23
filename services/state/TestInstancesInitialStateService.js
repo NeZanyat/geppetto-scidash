@@ -5,7 +5,6 @@ import TestInstancesAutocompleteAdapter from "../../shared/adapter/TestInstances
 import FilteringService from "../FilteringService";
 import Config from "../../shared/Config";
 
-
 export default class TestInstancesInitialStateService extends BaseInitialStateService {
     initialStateTemplate = {
       data: [
@@ -16,7 +15,10 @@ export default class TestInstancesInitialStateService extends BaseInitialStateSe
           tags: [" "],
           owner: " ",
           timestamp: " ",
-          block: false
+          block: {
+            isBlocked: false,
+            testId: 0
+          }
         },
       ],
       autoCompleteData: {

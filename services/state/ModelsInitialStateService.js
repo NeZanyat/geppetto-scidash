@@ -15,11 +15,15 @@ export default class ModelsInitialStateService extends BaseInitialStateService {
           source: " ",
           tags: [],
           owner: " ",
-          timestamp: " "
+          timestamp: " ",
+          block: {
+            isBlocked: false,
+            modelId: 0
+          }
         }
       ],
       autoCompleteData:{
-        name: [], class: [], tags: [], owner: [] 
+        name: [], class: [], tags: [], owner: []
       }
     }
 
